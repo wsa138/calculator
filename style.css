@@ -1,0 +1,64 @@
+body {
+    background-color: rgb(75, 46, 75);
+}
+
+#display {
+    background-color: white;
+    width: 100%;
+    text-align: right;
+    font-size: xxx-large;
+    height: 1.5em;
+}
+
+#buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 5%;
+    grid-row-gap: 5%;
+    padding: 1em;
+} 
+
+#calculator {
+    background-color: aqua;
+    width: 50%;
+    height: 68%;
+    margin: auto;
+    margin-top: 10%;
+    border: solid;
+    border-width: .5em;
+}
+
+.button {
+    margin: auto;
+    height: 3em;
+    width: 3.5em;
+    border-radius: 50%;
+    font-size: x-large;
+    background-color: rgb(56, 55, 55);
+}
+
+#clear {
+    grid-column: span 2;
+    width: 7em;
+    border-radius: 10%;
+}
+
+.sign {
+    color: green;
+}
+
+#equals {
+    background-color: green;
+}
+
+#clear {
+    color: red;
+}
+
+#backspace {
+    color: red;
+}
+
+.number {
+    color: white;
+}
