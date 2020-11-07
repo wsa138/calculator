@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(75, 46, 75);
+    background-color: rgb(224, 221, 221);
 }
 
 #display {
@@ -19,12 +19,13 @@ body {
 } 
 
 #calculator {
-    background-color: aqua;
+    background-color: black;
     width: 50%;
     height: 68%;
     margin: auto;
     margin-top: 10%;
     border: solid;
+    border-color: grey;
     border-width: .5em;
 }
 
@@ -35,6 +36,15 @@ body {
     border-radius: 50%;
     font-size: x-large;
     background-color: rgb(56, 55, 55);
+}
+
+.button:hover {
+    background-color: grey;
+}
+
+.button:active {
+    transform: translateY(2px) translateX(2px);
+
 }
 
 #clear {
