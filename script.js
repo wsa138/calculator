@@ -1,3 +1,9 @@
+var numberButton = document.querySelectorAll(".number");
+
+for (i=0; i<10; i++) {
+    numberButton[i].addEventListener("click", addInputCurrentDisplay);
+}
+
 function addition(firstNumber, secondNumber) {
     return (firstNumber + secondNumber);
 }
@@ -27,3 +33,12 @@ function operate(firstNumber, secondNumber, operator) {
     }
 }
 
+function addInputCurrentDisplay(numberClicked) {
+    currentDisplay = document.getElementById("display");
+    if (currentDisplay === " ") {
+        currentDisplay.innerHTML = this.textContent;
+    } else {
+        let newNumber = currentDisplay.textContent + this.textContent;
+        currentDisplay.innerHTML = newNumber;
+    }
+}
