@@ -21,7 +21,7 @@ body {
 #calculator {
     background-color: black;
     width: 50%;
-    height: 68%;
+    height: 70%;
     margin: auto;
     margin-top: 10%;
     border: solid;
@@ -31,10 +31,10 @@ body {
 
 .button {
     margin: auto;
-    height: 3em;
-    width: 3.5em;
+    height: 2.2em;
+    width: 2.5em;
     border-radius: 50%;
-    font-size: x-large;
+    font-size: xx-large;
     background-color: rgb(56, 55, 55);
 }
 
@@ -49,16 +49,22 @@ body {
 
 #clear {
     grid-column: span 2;
-    width: 7em;
+    width: 6em;
     border-radius: 10%;
 }
 
 .operator {
     color: green;
+    font-weight: 700;
 }
 
 #equals {
     background-color: green;
+    font-weight: 700;
+}
+
+#equals:hover {
+    background-color: rgb(26, 153, 26);
 }
 
 #clear {
@@ -71,4 +77,12 @@ body {
 
 .number {
     color: white;
+}
+
+#operatorDisplay {
+    background-color: rgb(240, 230, 230);
+    width: 100%;
+    height: 1.5em;
+    font-size: large;
+    text-align: right;
 }
