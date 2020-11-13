@@ -32,18 +32,21 @@ backspaceButton.addEventListener("click", backspace);
 // When operator button is clicked, adds the number and the operator to the calc array.
 for (i = 0; i < operatorButton.length; i++) {
     operatorButton[i].addEventListener("click", function() {
+        displayPreviousTotal();
         calcArray.push(currentDisplay.textContent);
         calcArray.push(this.textContent);
         clearDisplay();
         let calcLength = calcArray.length;
         if (calcArray[calcLength - 1] === this.textContent) {
-            operatorDisplay.textContent = this.textContent;
+            operatorDisplay.textContent = (`${calcArray[0]} ${calcArray[1]}`);
         }
     })
 }
 
 // Event listener on equals button provides the answer to answer equation.
-equalsButton.addEventListener("click", function() {
+equalsButton.addEventListener("click", runEqualsEquation)
+
+function displayPreviousTotal() {
     calcArray.push(currentDisplay.textContent);
     let operator = "";
     let answer = "";
@@ -61,8 +64,28 @@ equalsButton.addEventListener("click", function() {
     currentDisplay.textContent = answer;
     operatorDisplay.textContent = "=";
     calcArray = [];
-})
+}
 
+
+function runEqualsEquation() {
+    calcArray.push(currentDisplay.textContent);
+    let operator = "";
+    let answer = "";
+    for (i = 0; i < calcArray.length; i++) {
+        if (calcArray[i] === "+" || calcArray[i] === "-" || calcArray[i] === "/" || calcArray[i] === "x") {
+            operator = calcArray[i];
+        } else {
+            if (answer == "") {
+                answer = calcArray[i];
+            } else {
+                answer = operate(answer, calcArray[i], operator)
+            }
+        }
+    }
+    currentDisplay.textContent = answer;
+    operatorDisplay.textContent = "=";
+    calcArray = [];
+}
 
 
 
@@ -113,6 +136,7 @@ function updateDisplay(num) {
 
 function clearDisplay() {
     currentDisplay.innerHTML = "";
+    operatorDisplay.innerHTML = "";
 }
 
 function backspace() {
@@ -122,7 +146,6 @@ function backspace() {
 }
 
 function resetCalc() {
-    oldNUmber = 0;
-    oldOperator = "";
+    calcArray = [];
 }
 
