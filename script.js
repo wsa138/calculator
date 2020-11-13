@@ -1,18 +1,10 @@
 var numberButton = document.querySelectorAll(".number");
-
 var clearButton = document.getElementById("clear");
-
 var currentDisplay = document.getElementById("display");
-
 var backspaceButton = document.getElementById("backspace");
-
 var operatorButton = document.getElementsByClassName("operator");
-
 var equalsButton = document.getElementById("equals");
-
 var operatorDisplay = document.getElementById("operatorDisplay");
-
-// Array that holes all numbers and operators entered into calculator.
 var calcArray = [];
 
 
@@ -38,13 +30,17 @@ for (i = 0; i < operatorButton.length; i++) {
         clearDisplay();
         let calcLength = calcArray.length;
         if (calcArray[calcLength - 1] === this.textContent) {
-            operatorDisplay.textContent = (`${calcArray[0]} ${calcArray[1]}`);
+            operatorDisplay.textContent = (`${calcArray[0].slice(0, 20)} ${calcArray[1]}`);
         }
     })
 }
 
 // Event listener on equals button provides the answer to answer equation.
-equalsButton.addEventListener("click", runEqualsEquation)
+equalsButton.addEventListener("click", displayPreviousTotal)
+
+
+
+
 
 function displayPreviousTotal() {
     calcArray.push(currentDisplay.textContent);
@@ -61,33 +57,10 @@ function displayPreviousTotal() {
             }
         }
     }
-    currentDisplay.textContent = answer;
+    currentDisplay.textContent = answer.toString().slice(0, 15);
     operatorDisplay.textContent = "=";
     calcArray = [];
 }
-
-
-function runEqualsEquation() {
-    calcArray.push(currentDisplay.textContent);
-    let operator = "";
-    let answer = "";
-    for (i = 0; i < calcArray.length; i++) {
-        if (calcArray[i] === "+" || calcArray[i] === "-" || calcArray[i] === "/" || calcArray[i] === "x") {
-            operator = calcArray[i];
-        } else {
-            if (answer == "") {
-                answer = calcArray[i];
-            } else {
-                answer = operate(answer, calcArray[i], operator)
-            }
-        }
-    }
-    currentDisplay.textContent = answer;
-    operatorDisplay.textContent = "=";
-    calcArray = [];
-}
-
-
 
 
 function addition(firstNumber, secondNumber) {;
