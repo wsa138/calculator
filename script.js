@@ -57,7 +57,8 @@ function displayPreviousTotal() {
             }
         }
     }
-    currentDisplay.textContent = answer.toString().slice(0, 15);
+    answer = checkAnswerSize(answer);
+    currentDisplay.textContent = answer.toString().slice(0, 14);
     operatorDisplay.textContent = "=";
     calcArray = [];
 }
@@ -122,3 +123,12 @@ function resetCalc() {
     calcArray = [];
 }
 
+
+// Displays error if answer is greater than the max number that can be displayed.
+function checkAnswerSize(answer) {
+    if (answer > 99999999999999) {
+        return "Error";
+    } else {
+        return answer;
+    }
+}
