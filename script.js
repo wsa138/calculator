@@ -5,6 +5,7 @@ var backspaceButton = document.getElementById("backspace");
 var operatorButton = document.getElementsByClassName("operator");
 var equalsButton = document.getElementById("equals");
 var operatorDisplay = document.getElementById("operatorDisplay");
+var decimalButton = document.getElementById("decimal");
 var calcArray = [];
 
 
@@ -38,7 +39,8 @@ for (i = 0; i < operatorButton.length; i++) {
 // Event listener on equals button provides the answer to answer equation.
 equalsButton.addEventListener("click", displayPreviousTotal)
 
-
+// EVent listener on decimal button to add decimal point.
+decimalButton.addEventListener("click", addDecimalCurrentDisplay);
 
 
 
@@ -52,8 +54,10 @@ function displayPreviousTotal() {
         } else {
             if (answer == "") {
                 answer = calcArray[i];
+            } else if (calcArray[i] == 0 && operator === "/") {
+                return currentDisplay.textContent = "Fatality by Zero";
             } else {
-                answer = operate(answer, calcArray[i], operator)
+                answer = operate(answer, calcArray[i], operator);
             }
         }
     }
@@ -96,7 +100,18 @@ function operate(firstNumber, secondNumber, operator) {
 }
 
 function addInputCurrentDisplay() {
-    if (currentDisplay === " ") {
+    if (currentDisplay === "") {
+        updateDisplay(this.textContent);
+    } else {
+        let newNumber = currentDisplay.textContent + this.textContent;
+        updateDisplay(newNumber);
+    }
+}
+
+function addDecimalCurrentDisplay() {
+    if (currentDisplay.textContent.includes(".")) {
+        return;
+    }else if (currentDisplay === "") {
         updateDisplay(this.textContent);
     } else {
         let newNumber = currentDisplay.textContent + this.textContent;
@@ -132,3 +147,12 @@ function checkAnswerSize(answer) {
         return answer;
     }
 }
+
+// Rounds decimal numbers that repeat.
+function roundDecimal(answer) {
+    if (answer) {
+        return
+    }
+}
+
+
