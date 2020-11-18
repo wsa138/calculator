@@ -6,6 +6,7 @@ var operatorButton = document.getElementsByClassName("operator");
 var equalsButton = document.getElementById("equals");
 var operatorDisplay = document.getElementById("operatorDisplay");
 var decimalButton = document.getElementById("decimal");
+var posNeg = document.getElementById("posneg");
 var calcArray = [];
 
 
@@ -25,6 +26,13 @@ backspaceButton.addEventListener("click", backspace);
 // When operator button is clicked, adds the number and the operator to the calc array.
 for (i = 0; i < operatorButton.length; i++) {
     operatorButton[i].addEventListener("click", function() {
+        // Replaces previous operator if no new number entered before another operator.
+        if (currentDisplay.textContent == "") {
+            calcArray.pop();
+            calcArray.push(this.textContent);
+            operatorDisplay.textContent = (`${calcArray[0].slice(0, 20)} ${calcArray[1]}`);
+            return;
+        }
         displayPreviousTotal();
         calcArray.push(currentDisplay.textContent);
         calcArray.push(this.textContent);
@@ -42,7 +50,60 @@ equalsButton.addEventListener("click", displayPreviousTotal)
 // EVent listener on decimal button to add decimal point.
 decimalButton.addEventListener("click", addDecimalCurrentDisplay);
 
+// Event listener to add typed number to calculator.
+document.addEventListener('keydown', function(e) {
+    switch (parseInt(e.key)) {
+        case 0:
+            addNumberKey(e.key);
+            break;
+        case 1:
+            addNumberKey(e.key);
+            break;
+        case 2:
+            addNumberKey(e.key);
+            break;
+        case 3:
+            addNumberKey(e.key);
+            break;
+        case 4:
+            addNumberKey(e.key);
+            break;
+        case 5:
+            addNumberKey(e.key);
+            break;
+        case 6:
+            addNumberKey(e.key);
+            break;
+        case 7:
+            addNumberKey(e.key);
+            break;
+        case 8:
+            addNumberKey(e.key);
+            break;
+        case 9:
+            addNumberKey(e.key);
+            break;
+    }
+})
 
+// Backspace and Delete key's delete most recent button/key entry.
+document.addEventListener('keydown', function(e) {
+    if (e.key == 'Backspace' || e.key == 'Delete') {
+        backspace();
+    }
+})
+
+// Swaps entered number to either positive or negative.
+posNeg.addEventListener('click', function() {
+    if (currentDisplay.textContent == 0) {
+        return;
+    } else if (currentDisplay.textContent < 0) {
+        console.log('test');
+        currentDisplay.textContent = Math.abs(currentDisplay.textContent);
+    } else if (currentDisplay.textContent > 0) {
+        currentDisplay.textContent = -Math.abs(currentDisplay.textContent);
+    }
+})
 
 function displayPreviousTotal() {
     calcArray.push(currentDisplay.textContent);
@@ -155,4 +216,13 @@ function roundDecimal(answer) {
     }
 }
 
+// Adds number key press to display.
+function addNumberKey(numKey) {
+    if (currentDisplay === "") {
+            updateDisplay(numKey);
+        } else {
+            let newNumber = currentDisplay.textContent + numKey;
+            updateDisplay(newNumber);
+        }
+}
 
