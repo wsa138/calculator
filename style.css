@@ -20,13 +20,14 @@ body {
 
 #calculator {
     background-color: black;
-    width: 50%;
-    height: 70%;
     margin: auto;
-    margin-top: 10%;
+    overflow: auto;
     border: solid;
     border-color: grey;
     border-width: .5em;
+    display: table;
+    overflow: hidden;
+    min-height: 35em;
 }
 
 .button {
