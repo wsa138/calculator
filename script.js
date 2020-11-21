@@ -33,7 +33,7 @@ for (i = 0; i < operatorButton.length; i++) {
             operatorDisplay.textContent = (`${calcArray[0].slice(0, 20)} ${calcArray[1]}`);
             return;
         }
-        displayPreviousTotal();
+        displayTotal();
         calcArray.push(currentDisplay.textContent);
         calcArray.push(this.textContent);
         clearDisplay();
@@ -45,7 +45,7 @@ for (i = 0; i < operatorButton.length; i++) {
 }
 
 // Event listener on equals button provides the answer to answer equation.
-equalsButton.addEventListener("click", displayPreviousTotal)
+equalsButton.addEventListener("click", displayTotal)
 
 // EVent listener on decimal button to add decimal point.
 decimalButton.addEventListener("click", addDecimalCurrentDisplay);
@@ -105,7 +105,8 @@ posNeg.addEventListener('click', function() {
     }
 })
 
-function displayPreviousTotal() {
+
+function displayTotal() {
     calcArray.push(currentDisplay.textContent);
     let operator = "";
     let answer = "";
@@ -123,7 +124,11 @@ function displayPreviousTotal() {
         }
     }
     answer = checkAnswerSize(answer);
-    currentDisplay.textContent = answer.toString().slice(0, 14);
+    answer = Math.round(answer * 100000000000) / 100000000000;
+    if ((answer.toString().length) > 13) {
+        answer = answer.toExponential(7);
+    };
+    currentDisplay.textContent = answer;
     operatorDisplay.textContent = "=";
     calcArray = [];
 }
@@ -161,7 +166,9 @@ function operate(firstNumber, secondNumber, operator) {
 }
 
 function addInputCurrentDisplay() {
-    if (currentDisplay === "") {
+    if (currentDisplay.textContent.length > 12) {
+        return;
+    } else if (currentDisplay === "") {
         updateDisplay(this.textContent);
     } else {
         let newNumber = currentDisplay.textContent + this.textContent;
@@ -209,20 +216,16 @@ function checkAnswerSize(answer) {
     }
 }
 
-// Rounds decimal numbers that repeat.
-function roundDecimal(answer) {
-    if (answer) {
-        return
-    }
-}
 
 // Adds number key press to display.
 function addNumberKey(numKey) {
-    if (currentDisplay === "") {
+    if (currentDisplay.textContent.length > 12) {
+        return;
+    } else if (currentDisplay === "") {
             updateDisplay(numKey);
-        } else {
-            let newNumber = currentDisplay.textContent + numKey;
-            updateDisplay(newNumber);
-        }
+    } else {
+        let newNumber = currentDisplay.textContent + numKey;
+        updateDisplay(newNumber);
+    }
 }
 
