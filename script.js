@@ -166,7 +166,11 @@ function operate(firstNumber, secondNumber, operator) {
 }
 
 function addInputCurrentDisplay() {
-    if (currentDisplay.textContent.length > 12) {
+    displayText = operatorDisplay.textContent;
+    if (displayText.slice(displayText.length - 1) == "=") {
+        currentDisplay.textContent = "";
+        updateDisplay(this.textContent);
+    } else if (currentDisplay.textContent.length > 12) {
         return;
     } else if (currentDisplay === "") {
         updateDisplay(this.textContent);
