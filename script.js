@@ -106,6 +106,8 @@ posNeg.addEventListener('click', function() {
 })
 
 
+
+// Adds current display number to calcArray and runs the equation in the array.
 function displayTotal() {
     calcArray.push(currentDisplay.textContent);
     let operator = "";
@@ -165,11 +167,13 @@ function operate(firstNumber, secondNumber, operator) {
     }
 }
 
+// Deals with adding the input numbers to the display.
 function addInputCurrentDisplay() {
     displayText = operatorDisplay.textContent;
     if (displayText.slice(displayText.length - 1) == "=") {
         currentDisplay.textContent = "";
         updateDisplay(this.textContent);
+        operatorDisplay.textContent = '';
     } else if (currentDisplay.textContent.length > 12) {
         return;
     } else if (currentDisplay === "") {
